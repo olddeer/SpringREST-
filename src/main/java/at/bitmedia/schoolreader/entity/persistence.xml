@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+    <property name="connection.driver_class">org.postgresql.Driver</property>
+      <mapping class="at.bitmedia.schoolreader.entity.Class"/>
+      <mapping class="at.bitmedia.schoolreader.entity.Pupil"/>
+      <mapping class="at.bitmedia.schoolreader.entity.Result"/>
+      <mapping class="at.bitmedia.schoolreader.entity.Task"/>
+      <mapping class="at.bitmedia.schoolreader.entity.Teacher"/>
+      <mapping class="at.bitmedia.schoolreader.entity.TaskPupil"/>
+    <mapping class="at.bitmedia.schoolreader.entity.TeacherClass"/>
+    <mapping class="at.bitmedia.schoolreader.entity.Audio"/>
+      <!-- <property name="connection.username"/> -->
+    <!-- <property name="connection.password"/> -->
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
