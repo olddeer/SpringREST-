@@ -2,7 +2,7 @@ FROM openjdk:8
 
 ENV JAVA_OPTS=""
 
-COPY version1/target/*.jar /app.jar
+COPY /target/*.jar /app.jar
 
 WORKDIR /var/www
 
