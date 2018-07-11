@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  postgres:
+    image: registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/patch-1/postgres
+    ports:
+      - 5436:5432
+  tomcat:
+    image: registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/patch-1/tomcat
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: Cnfkrth1
+      DB_JDBCURL: jdbc:postgresql://schoolreader-db/SchoolReader v.2
+    links:
+      - postgres:schoolreader-db
+    ports:
+      - 8080:8080
