@@ -23,7 +23,7 @@ maven-build:
     - mvn clean install -Dspring.datasource.url="jdbc:postgresql://postgres:5432/$POSTGRES_DB" -Dspring.datasource.username="$POSTGRES_USER" -Dspring.datasource.password="$POSTGRES_PASSWORD"
   artifacts:
     paths:
-      - $CI_PROJECT_DIR/version1/target/*.jar
+      - $CI_PROJECT_DIR/target/*.jar
     expire_in: 1 week
       
 webapp_package:
