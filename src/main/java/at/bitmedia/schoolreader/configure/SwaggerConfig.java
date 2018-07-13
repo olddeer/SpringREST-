@@ -65,7 +65,7 @@ public class SwaggerConfig {
     }
     private SecurityScheme securityScheme() {
 
-        GrantType creGrant = new ResourceOwnerPasswordCredentialsGrant("http://localhost:8080"+"/oauth/token");
+        GrantType creGrant = new ResourceOwnerPasswordCredentialsGrant("http://localhost:8081"+"/oauth/token");
 
         SecurityScheme oauth = new OAuthBuilder().name("spring_oauth")
                 .grantTypes(Arrays.asList(creGrant))

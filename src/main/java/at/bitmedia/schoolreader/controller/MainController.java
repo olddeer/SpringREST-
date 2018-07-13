@@ -13,7 +13,7 @@ import at.bitmedia.schoolreader.service.TaskPupilServiceBean;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pupil/**")
+@RequestMapping("/pupil")
 public class MainController {
 
     @Autowired
