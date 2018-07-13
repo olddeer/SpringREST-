@@ -1,21 +1,18 @@
 package at.bitmedia.schoolreader.entity;
 
-import org.hibernate.annotations.TypeDef;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 public enum Status {
-    In_progress("In progress"),Done("Done"),In_checking("In checking");
+    New("New"), In_progress("In progress"), Done("Done"), In_checking("In checking");
     private String name;
-    private Status(String name){
-        this.name=name;
-    }
-    public  String toString(){
-        return this.name;
+
+    private Status(String name) {
+        this.name = name;
     }
 
     Status() {
+    }
+
+    public String toString() {
+        return this.name;
     }
 
     public String getName() {

@@ -23,7 +23,7 @@ public class TaskPupilServiceBean implements  TaskPupilService{
 
     @Override
     public List<TaskPupil> findByTitle(String title) {
-        return taskRepo.findAllByTask_Description(title);
+        return taskRepo.findAllByTask_Title(title);
     }
 
     @Override

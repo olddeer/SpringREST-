@@ -26,27 +26,32 @@ public class ResultController {
     ResultServiceBean resBean;
 
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "*")
     public Result getResultById(@PathVariable Integer id) {
         return resBean.findById(id);
     }
 
 
     @GetMapping("/all")
+    @CrossOrigin(origins = "*")
     public List<Result> getResultAll() {
         return resBean.findAll();
     }
 
     @PostMapping("/add")
+    @CrossOrigin(origins = "*")
     public Result uploadResult(@Valid @RequestBody Result res) {
         return resBean.insertResult(res);
     }
 
     @PostMapping("/uploadAudio")
+    @CrossOrigin(origins = "*")
     public Audio uploadFile(@RequestParam("file") MultipartFile file) {
         return fileStorageService.storeFile(file);
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<org.springframework.core.io.Resource> downloadFile(@PathVariable String fileName,
         HttpServletRequest request) {
 

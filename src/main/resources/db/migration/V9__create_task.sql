@@ -16,7 +16,8 @@ SET default_with_oids = false;
 
 CREATE TABLE public.SR_TASK (
     SRTA_ID serial NOT NULL,
-    DESCRIPTION character varying,
+    TITLE character varying,
+    LOCATION character varying,
      CREATE_DATE  timestamp(0) without time zone NOT NULL DEFAULT now(),
     UPDATE_DATE  timestamp(0) without time zone NOT NULL DEFAULT now()
 );

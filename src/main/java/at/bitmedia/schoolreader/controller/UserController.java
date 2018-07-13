@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +30,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/findAllTasks", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @CrossOrigin(origins = "*")
     public ResponseEntity<List<TaskPupil>> findTasks() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return new ResponseEntity<List<TaskPupil>>(taskBean.findAllTasksByUsername(auth.getName()), HttpStatus.OK);
@@ -36,6 +38,7 @@ public class UserController {
 
 
     @RequestMapping(name = "/all", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @CrossOrigin(origins = "*")
     public ResponseEntity<List<Pupil>> findAll() {
         return new ResponseEntity<List<Pupil>>(repo.findAll(), HttpStatus.OK);
     }
