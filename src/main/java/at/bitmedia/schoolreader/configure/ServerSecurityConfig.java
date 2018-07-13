@@ -1,6 +1,5 @@
 package at.bitmedia.schoolreader.configure;
 
-import at.bitmedia.schoolreader.configure.Encoders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -20,16 +19,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Order(SecurityProperties.BASIC_AUTH_ORDER)
 @Import(Encoders.class)
 public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsService;
     @Autowired
     private PasswordEncoder userPasswordEncoder;
+
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         System.out.println(auth);

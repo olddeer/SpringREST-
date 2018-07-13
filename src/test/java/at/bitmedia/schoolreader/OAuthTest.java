@@ -81,6 +81,10 @@ public class OAuthTest {
         return jsonParser.parseMap(resultString).get("access_token").toString();
     }
 
+    @Test
+    public void test(){
+        assert(true);
+    }
   /*  @Test
     public void testAll() throws Exception {
         List<Task> list = taskService.findAll();
