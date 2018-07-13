@@ -1,1 +1,0 @@
-        INSERT INTO public.SR_TEACHER_CLASS VALUES (1,1,2);
