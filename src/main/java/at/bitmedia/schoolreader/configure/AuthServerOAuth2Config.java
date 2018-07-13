@@ -30,7 +30,6 @@ import javax.sql.DataSource;
 public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter {
 
 
-
     @Autowired
     @Qualifier("dataSource")
     private DataSource dataSource;
@@ -51,6 +50,7 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
         converter.setSigningKey("123");
         return converter;
     }
+
     @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(accessTokenConverter());
@@ -63,19 +63,22 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
-        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()").passwordEncoder(oauthClientPasswordEncoder);
+        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()")
+            .passwordEncoder(oauthClientPasswordEncoder);
     }
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients .inMemory()
-                .withClient("spring-security-oauth2-read-write-client")
-                .authorizedGrantTypes("client_credentials", "password", "refresh_token", "authorization_code")
-                .scopes("read", "write")
-                .resourceIds("resource-server-rest-api")
-                .accessTokenValiditySeconds(36000)
-                .refreshTokenValiditySeconds(3600)
-                .secret("$2a$04$soeOR.QFmClXeFIrhJVLWOQxfHjsJLSpWrU1iGxcMGdu.a5hvfY4W");
+        clients.inMemory()
+            .withClient("spring-security-oauth2-read-write-client")
+            .authorizedGrantTypes("client_credentials", "password", "refresh_token", "authorization_code")
+            .scopes("read", "write")
+            .resourceIds("resource-server-rest-api")
+            .accessTokenValiditySeconds(36000)
+            .refreshTokenValiditySeconds(3600)
+            .secret("$2a$04$soeOR.QFmClXeFIrhJVLWOQxfHjsJLSpWrU1iGxcMGdu.a5hvfY4W");
     }
+
     @Bean
     public DefaultTokenServices tokenServices() {
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
@@ -89,7 +92,8 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager).userDetailsService(userDetailsService).tokenServices(tokenServices())
-                .accessTokenConverter(accessTokenConverter());
+        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager)
+            .userDetailsService(userDetailsService).tokenServices(tokenServices())
+            .accessTokenConverter(accessTokenConverter());
     }
 }
