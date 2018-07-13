@@ -10,12 +10,7 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.password_resets
-    OWNER to schoolreader;
 
--- Index: password_resets_email_index
-
--- DROP INDEX public.password_resets_email_index;
 
 CREATE INDEX password_resets_email_index
     ON public.password_resets USING btree
