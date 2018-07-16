@@ -63,6 +63,15 @@ public class TaskPupil {
     @Column(name = "STATUS")
     @Convert(converter = CustomConverter.class)
     private  Status status;
+private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public int getCount_of_solved_repeats() {
         return count_of_solved_repeats;

@@ -24,12 +24,13 @@ CREATE TYPE public.status_task AS ENUM (
 ALTER TYPE public.status_task OWNER TO postgres;
 
 CREATE TABLE public.SR_TASK_PUPIL (
-    SRT_P_ID serial NOT NULL,
-   SRP_ID serial NOT NULL,
-    SRTA_ID serial NOT NULL,
-    COUNT_OF_REPEATS integer NOT NULL,
-  COUNT_OF_SOLVED_REPEATS integer NOT NULL,
-   STATUS public.status_task DEFAULT 'New'::public.status_task,
+         SRT_P_ID serial NOT NULL,
+        SRP_ID serial NOT NULL,
+         SRTA_ID serial NOT NULL,
+         COUNT_OF_REPEATS integer NOT NULL,
+         COUNT_OF_SOLVED_REPEATS integer NOT NULL,
+        STATUS public.status_task DEFAULT 'New'::public.status_task,
+          CATEGORY char varying,
      CREATE_DATE  timestamp(0) without time zone NOT NULL DEFAULT now(),
     UPDATE_DATE  timestamp(0) without time zone NOT NULL DEFAULT now()
 );

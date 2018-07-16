@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/secured/result")
+
 public class ResultController {
 
     @Autowired

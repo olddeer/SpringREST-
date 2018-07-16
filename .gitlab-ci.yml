@@ -12,7 +12,7 @@ services:
   - postgres:latest
   
 variables:
-  POSTGRES_DB: SchoolReader v.2
+  POSTGRES_DB: schoolreader
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: Cnfkrth1
 
