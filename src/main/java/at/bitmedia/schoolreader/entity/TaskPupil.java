@@ -1,7 +1,6 @@
 package at.bitmedia.schoolreader.entity;
 
 import at.bitmedia.schoolreader.configure.CustomConverter;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,10 +13,10 @@ public class TaskPupil {
     public TaskPupil() {
     }
 
-    public TaskPupil(int taskPupilId,  Status status, int count) {
+    public TaskPupil(int taskPupilId,  Status status, int count_of_repeats) {
         this.taskPupilId = taskPupilId;
         this.status = status;
-        this.count = count;
+        this.count_of_repeats = count_of_repeats;
     }
 
     @Id
@@ -27,7 +26,6 @@ public class TaskPupil {
 
         @ManyToOne(cascade = CascadeType.ALL)
         @JoinColumn(name = "SRTA_ID")
-        @JsonIgnore
     private Task task;
     @Column(name = "CREATE_DATE")
     private LocalDateTime create_date;
@@ -57,15 +55,39 @@ public class TaskPupil {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "SRP_ID")
-    @JsonIgnore
+
     private  Pupil pupil;
-    @Column(name = "COUNT")
-    private int count;
+
+    private int count_of_repeats;
+                     private int count_of_solved_repeats;
     @Column(name = "STATUS")
     @Convert(converter = CustomConverter.class)
     private  Status status;
+private String category;
 
+    public String getCategory() {
+        return category;
+    }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getCount_of_solved_repeats() {
+        return count_of_solved_repeats;
+    }
+
+    public void setCount_of_solved_repeats(int count_of_solved_repeats) {
+        this.count_of_solved_repeats = count_of_solved_repeats;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
 
     public int getTaskPupilId() {
         return taskPupilId;
@@ -87,12 +109,12 @@ public class TaskPupil {
 
 
 
-    public int getCount() {
-        return count;
+    public int getCount_of_repeats() {
+        return count_of_repeats;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setCount_of_repeats(int count) {
+        this.count_of_repeats = count;
     }
 
 

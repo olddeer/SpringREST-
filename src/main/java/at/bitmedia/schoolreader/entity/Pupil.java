@@ -1,5 +1,7 @@
 package at.bitmedia.schoolreader.entity;
 
+
+
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -87,7 +89,6 @@ public class Pupil  implements UserDetails {
 
 
     @OneToMany(mappedBy = "pupil")
-
     private Set<TaskPupil> tasksPupil = new HashSet<>();
 
     public Pupil(int pupilId, String name, String surname, Integer countStars) {

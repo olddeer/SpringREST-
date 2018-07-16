@@ -22,7 +22,7 @@ public class TaskServiceBean implements TaskService {
 
     @Override
     public Task findByDescription(String desk) {
-        return taskRepo.findTaskByDescription(desk);
+        return taskRepo.findTaskByTitle(desk);
     }
 
     @Override

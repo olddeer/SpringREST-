@@ -10,7 +10,7 @@ services:
     environment:
       DB_USERNAME: postgres
       DB_PASSWORD: Cnfkrth1
-      DB_JDBCURL: jdbc:postgresql://schoolreader-db/SchoolReader v.2
+      DB_JDBCURL: jdbc:postgresql://schoolreader-db/schoolreader
     links:
       - postgres:schoolreader-db
     ports:
