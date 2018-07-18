@@ -18,20 +18,25 @@ import java.util.List;
 @RequestMapping("/secured/tasks")
 @Slf4j
 public class TaskController {
+
     @Autowired
     TaskServiceBean taskPup;
-@Autowired
+    @Autowired
     TaskPupilServiceBean taskPupilServiceBean;
+
     @RequestMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @CrossOrigin(origins = "*")
     public ResponseEntity<List<Task>> allTasks() {
         return new ResponseEntity<List<Task>>(taskPup.findAll(), HttpStatus.OK);
     }
+
     @RequestMapping(value = "{username}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @CrossOrigin(origins = "*")
     public ResponseEntity<List<TaskPupil>> taskByUsername(String username) {
-        return new ResponseEntity<List<TaskPupil>>(taskPupilServiceBean.findAllTasksByUsername(username), HttpStatus.OK);
+        return new ResponseEntity<List<TaskPupil>>(taskPupilServiceBean.findAllTasksByUsername(username),
+            HttpStatus.OK);
     }
+
     @RequestMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @CrossOrigin(origins = "*")
     public ResponseEntity<Task> createTask(@Valid @RequestBody Task tp) {

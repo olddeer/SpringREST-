@@ -1,5 +1,6 @@
 package at.bitmedia.schoolreader.configure;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,14 +20,31 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    @Value("${swagger.err401.message}")
+    private String message401;
+    @Value("${swagger.err406.message}")
+    private String message406;
+    @Value("${swagger.err500.message}")
+    private String message500;
+    @Value("${swagger.url}")
+    private String hostUrl;
+    @Value("${swagger.title}")
+    private String title;
+    @Value("${swagger.description}")
+    private String description;
+    @Value("${swagger.scope.read}")
+    private String readScope;
+    @Value("${swagger.scope.write}")
+    private String writeScope;
+
     @Bean
     public Docket api() {
         List<ResponseMessage> list = new java.util.ArrayList<>();
-        list.add(new ResponseMessageBuilder().code(500).message("500 message")
+        list.add(new ResponseMessageBuilder().code(500).message(message500)
             .responseModel(new ModelRef("Result")).build());
-        list.add(new ResponseMessageBuilder().code(401).message("Unauthorized")
+        list.add(new ResponseMessageBuilder().code(401).message(message401)
             .responseModel(new ModelRef("Result")).build());
-        list.add(new ResponseMessageBuilder().code(406).message("Not Acceptable")
+        list.add(new ResponseMessageBuilder().code(406).message(message406)
             .responseModel(new ModelRef("Result")).build());
         return new Docket(DocumentationType.SWAGGER_2)
             .select()
@@ -39,17 +57,8 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("SchoolReader").description("Hello")
+        return new ApiInfoBuilder().title(title).description(description)
             .license("Open Source").version("1.0.0").build();
-    }
-
-    @Bean
-    public SecurityConfiguration security() {
-
-        return new SecurityConfiguration("spring-security-oauth2-read-write-client",
-            "$2a$04$soeOR.QFmClXeFIrhJVLWOQxfHjsJLSpWrU1iGxcMGdu.a5hvfY4W",
-            "1", "schoolReader", " ", ApiKeyVehicle.HEADER, " ", " ");
-
     }
 
     private AuthorizationScope[] scopes() {
@@ -63,13 +72,13 @@ public class SwaggerConfig {
         return springfox.documentation.spi.service.contexts.SecurityContext.builder()
             .securityReferences(
                 Arrays.asList(new SecurityReference("spring_oauth", scopes())))
-            .forPaths(PathSelectors.regex("/foos.*"))
+            .forPaths(PathSelectors.regex("/*"))
             .build();
     }
 
     private SecurityScheme securityScheme() {
 
-        GrantType creGrant = new ResourceOwnerPasswordCredentialsGrant("http://localhost:8081" + "/oauth/token");
+        GrantType creGrant = new ResourceOwnerPasswordCredentialsGrant(hostUrl + "/oauth/token");
 
         SecurityScheme oauth = new OAuthBuilder().name("spring_oauth")
             .grantTypes(Arrays.asList(creGrant))

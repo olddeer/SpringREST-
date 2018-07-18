@@ -1,5 +1,6 @@
 package at.bitmedia.schoolreader.configure;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,9 +24,11 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.requestMatchers()
+        http.httpBasic().disable().requestMatchers()
             .antMatchers(SECURED_PATTERN).and().authorizeRequests()
             .antMatchers(HttpMethod.POST, SECURED_PATTERN).access(SECURED_WRITE_SCOPE)
             .anyRequest().access(SECURED_READ_SCOPE);
+
+
     }
 }
