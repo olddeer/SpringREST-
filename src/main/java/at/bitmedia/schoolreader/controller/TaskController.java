@@ -30,9 +30,9 @@ public class TaskController {
         return new ResponseEntity<List<Task>>(taskPup.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "{username}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping( produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @CrossOrigin(origins = "*")
-    public ResponseEntity<List<TaskPupil>> taskByUsername(String username) {
+    public ResponseEntity<List<TaskPupil>> taskByUsername(@RequestParam String username) {
         return new ResponseEntity<List<TaskPupil>>(taskPupilServiceBean.findAllTasksByUsername(username),
             HttpStatus.OK);
     }
