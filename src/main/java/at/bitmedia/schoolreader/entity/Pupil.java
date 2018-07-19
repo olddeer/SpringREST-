@@ -89,6 +89,7 @@ public class Pupil  implements UserDetails {
 
 
     @OneToMany(mappedBy = "pupil")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Set<TaskPupil> tasksPupil = new HashSet<>();
 
     public Pupil(int pupilId, String name, String surname, Integer countStars) {
