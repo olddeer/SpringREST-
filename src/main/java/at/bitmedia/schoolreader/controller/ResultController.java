@@ -17,14 +17,14 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/secured/result")
+@RequestMapping("/schoolreader-api/result")
 
 public class ResultController {
 
     @Autowired
-    AudioService fileStorageService;
+    private AudioService fileStorageService;
     @Autowired
-    ResultServiceBean resBean;
+    private ResultServiceBean resBean;
 
     @GetMapping("/{id}")
     @CrossOrigin(origins = "*")
@@ -56,10 +56,8 @@ public class ResultController {
     public ResponseEntity<org.springframework.core.io.Resource> downloadFile(@PathVariable String fileName,
         HttpServletRequest request) {
 
-        // Load file as Resource
         org.springframework.core.io.Resource resource = fileStorageService.loadFileAsResource(fileName);
 
-        // Try to determine file's content type
         String contentType = null;
         try {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
@@ -67,7 +65,6 @@ public class ResultController {
 
         }
 
-        // Fallback to the default content type if type could not be determined
         if (contentType == null) {
             contentType = "application/octet-stream";
         }

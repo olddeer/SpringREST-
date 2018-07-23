@@ -15,14 +15,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/secured/tasks")
+@RequestMapping("/schoolreader-api/tasks")
 @Slf4j
 public class TaskController {
 
     @Autowired
-    TaskServiceBean taskPup;
+    private TaskServiceBean taskPup;
     @Autowired
-    TaskPupilServiceBean taskPupilServiceBean;
+    private TaskPupilServiceBean taskPupilServiceBean;
 
     @RequestMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @CrossOrigin(origins = "*")
@@ -30,7 +30,7 @@ public class TaskController {
         return new ResponseEntity<List<Task>>(taskPup.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping( produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @CrossOrigin(origins = "*")
     public ResponseEntity<List<TaskPupil>> taskByUsername(@RequestParam String username) {
         return new ResponseEntity<List<TaskPupil>>(taskPupilServiceBean.findAllTasksByUsername(username),
