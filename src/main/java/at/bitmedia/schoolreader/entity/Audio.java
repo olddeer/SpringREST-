@@ -24,7 +24,7 @@ public class Audio {
     private LocalDateTime update_date;
     @PrePersist
     public void prePersistDate() {
-        if(create_date  == null &&  update_date == null) //We set default value in case if the value is not set yet.
+        if(create_date  == null &&  update_date == null)
             create_date  = LocalDateTime.now();
         update_date =create_date;
     }

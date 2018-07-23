@@ -51,6 +51,7 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
         return converter;
     }
 
+
     @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(accessTokenConverter());
@@ -63,20 +64,12 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
-        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()")
-            .passwordEncoder(oauthClientPasswordEncoder);
+        oauthServer.allowFormAuthenticationForClients().passwordEncoder( oauthClientPasswordEncoder);
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-            .withClient("spring-security-oauth2-read-write-client")
-            .authorizedGrantTypes("client_credentials", "password", "refresh_token", "authorization_code")
-            .scopes("read", "write")
-            .resourceIds("resource-server-rest-api")
-            .accessTokenValiditySeconds(36000)
-            .refreshTokenValiditySeconds(3600)
-            .secret("$2a$04$soeOR.QFmClXeFIrhJVLWOQxfHjsJLSpWrU1iGxcMGdu.a5hvfY4W");
+        clients.jdbc(dataSource);
     }
 
     @Bean
