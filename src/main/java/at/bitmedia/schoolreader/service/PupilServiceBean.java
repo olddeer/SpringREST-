@@ -12,10 +12,10 @@ import java.util.List;
 public class PupilServiceBean implements PupilService {
 
     @Autowired
-    UserRepo userRepo;
+   private UserRepo userRepo;
 
     @Autowired
-    TaskPupilRepo taskRepo;
+   private TaskPupilRepo taskRepo;
 
     @Override
     public Pupil findById(int id) {
