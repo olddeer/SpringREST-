@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class ResultServiceBean implements  ResultService {
-   @Autowired
-    ResultRepo resultRepo;
+public class ResultServiceBean implements ResultService {
+
+    @Autowired
+    private ResultRepo resultRepo;
 
     @Override
     public List<Result> findAll() {

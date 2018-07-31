@@ -2,9 +2,12 @@ package at.bitmedia.schoolreader.service;
 
 import at.bitmedia.schoolreader.entity.Audio;
 import at.bitmedia.schoolreader.entity.FileStorageProperties;
+import at.bitmedia.schoolreader.entity.Status;
+import at.bitmedia.schoolreader.entity.TaskPupil;
 import at.bitmedia.schoolreader.exceptions.FileStorageException;
 import at.bitmedia.schoolreader.exceptions.MyFileNotFoundException;
 import at.bitmedia.schoolreader.repositories.AudioRepo;
+import at.bitmedia.schoolreader.repositories.TaskPupilRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -23,10 +26,13 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class AudioService {
     private final Path fileStorageLocation;
+    @Value("file.upload-dir")
+    private String path;
 @Autowired
-    AudioRepo auRepo;
-@Value("file.upload-dir")
-String path;
+   private  AudioRepo auRepo;
+@Autowired
+private TaskPupilServiceBean taskServe;
+
 
     @Autowired
     public AudioService(FileStorageProperties fileStorageProperties) {
@@ -39,7 +45,7 @@ String path;
         }
     }
 
-    public Audio storeFile(MultipartFile file) {
+    public Audio storeFile(MultipartFile file ) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 

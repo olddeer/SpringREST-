@@ -6,15 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class TaskPupilServiceBean implements  TaskPupilService{
-   @Autowired
-   TaskPupilRepo taskRepo;
+public class TaskPupilServiceBean implements TaskPupilService {
+
+    @Autowired
+    private TaskPupilRepo taskRepo;
 
     @Override
     public TaskPupil insertTaskPupil(TaskPupil tp) {
         return taskRepo.save(tp);
     }
+
+    @Override
+    public void updateTask(TaskPupil task){
+        taskRepo.save(task);
+    }
+
 
     @Override
     public List<TaskPupil> findAll() {

@@ -28,12 +28,13 @@ CREATE FUNCTION public.control_count_audios() RETURNS trigger
 	required_num integer;
 	current_task_status varchar(20);
 BEGIN
-	SELECT count INTO required_num
+	SELECT COUNT_OF_REPEATS INTO required_num
 	FROM SR_TASK_PUPIL
 	WHERE SRT_P_ID = NEW.SRT_P_ID;
 	SELECT COUNT(*) INTO current_num
 	FROM SR_RESULT
 	WHERE SRT_P_ID = NEW.SRT_P_ID;
+
 	SELECT STATUS INTO current_task_status
 	FROM  SR_TASK_PUPIL
 	WHERE SRT_P_ID = NEW.SRT_P_ID;
@@ -46,7 +47,7 @@ BEGIN
 			WHERE SRT_P_ID = NEW.SRT_P_ID;
 		END IF;
 	END IF;
-
+	UPDATE sr_task_pupil SET COUNT_OF_SOLVED_REPEATS = current_num + 1 WHERE srt_p_id =  NEW.SRT_P_ID;
 	RETURN NEW;
 
 END;

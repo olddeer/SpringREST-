@@ -1,21 +1,22 @@
 package at.bitmedia.schoolreader.service;
 
+import at.bitmedia.schoolreader.entity.Task;
+import at.bitmedia.schoolreader.repositories.CustomizedSaveImpl;
 import at.bitmedia.schoolreader.repositories.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import at.bitmedia.schoolreader.entity.Task;
-import at.bitmedia.schoolreader.repositories.CustomizedSaveImpl;
 
 import java.util.List;
+
 @Service
 public class TaskServiceBean implements TaskService {
-   @Autowired
-   TaskRepo taskRepo;
+
+    @Autowired
+    private TaskRepo taskRepo;
 
     @Override
     public Task insertTask(Task tp) {
-        CustomizedSaveImpl<Task> taskSave =new CustomizedSaveImpl<Task>();
-
+        CustomizedSaveImpl<Task> taskSave = new CustomizedSaveImpl<Task>();
 
         return taskSave.save(tp);
     }
