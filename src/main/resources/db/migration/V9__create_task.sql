@@ -18,6 +18,8 @@ CREATE TABLE public.SR_TASK (
     SRTA_ID serial NOT NULL,
     TITLE character varying,
     LOCATION character varying,
+    COUNT_OF_REPEATS integer NOT NULL,
+    CATEGORY char varying,
      CREATE_DATE  timestamp(0) without time zone NOT NULL DEFAULT now(),
     UPDATE_DATE  timestamp(0) without time zone NOT NULL DEFAULT now()
 );

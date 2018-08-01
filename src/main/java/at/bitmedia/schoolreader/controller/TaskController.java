@@ -2,8 +2,8 @@ package at.bitmedia.schoolreader.controller;
 
 import at.bitmedia.schoolreader.entity.Task;
 import at.bitmedia.schoolreader.entity.TaskPupil;
-import at.bitmedia.schoolreader.service.TaskPupilServiceBean;
-import at.bitmedia.schoolreader.service.TaskServiceBean;
+import at.bitmedia.schoolreader.service.TaskPupilService;
+import at.bitmedia.schoolreader.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,18 +11,17 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/schoolreader-api/tasks")
+@RequestMapping("/api/tasks")
 @Slf4j
 public class TaskController {
 
     @Autowired
-    private TaskServiceBean taskPup;
+    private TaskService taskPup;
     @Autowired
-    private TaskPupilServiceBean taskPupilServiceBean;
+    private TaskPupilService taskPupilServiceBean;
 
     @RequestMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @CrossOrigin(origins = "*")
@@ -35,12 +34,6 @@ public class TaskController {
     public ResponseEntity<List<TaskPupil>> taskByUsername(@RequestParam String username) {
         return new ResponseEntity<List<TaskPupil>>(taskPupilServiceBean.findAllTasksByUsername(username),
             HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    @CrossOrigin(origins = "*")
-    public ResponseEntity<Task> createTask(@Valid @RequestBody Task tp) {
-        return new ResponseEntity<Task>(taskPup.insertTask(tp), HttpStatus.OK);
     }
 
 

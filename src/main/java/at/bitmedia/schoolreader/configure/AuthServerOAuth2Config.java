@@ -64,7 +64,7 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
-        oauthServer.allowFormAuthenticationForClients().passwordEncoder( oauthClientPasswordEncoder);
+        oauthServer.allowFormAuthenticationForClients().passwordEncoder(oauthClientPasswordEncoder);
     }
 
     @Override

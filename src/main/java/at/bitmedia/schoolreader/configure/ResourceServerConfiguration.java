@@ -1,6 +1,5 @@
 package at.bitmedia.schoolreader.configure;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,12 +10,11 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-    @Value("${resource-server.resource-id}")
-    private String RESOURCE_ID;
+
+    private static final String RESOURCE_ID = "resource-server-rest-api";
     private static final String SECURED_READ_SCOPE = "#oauth2.hasScope('read')";
     private static final String SECURED_WRITE_SCOPE = "#oauth2.hasScope('write')";
-    @Value("${resource-server.secured-pattern}")
-    private String SECURED_PATTERN;
+    private static final String SECURED_PATTERN = "/api/**";
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {

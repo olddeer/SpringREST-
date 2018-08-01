@@ -22,6 +22,9 @@ public class Class {
     private  LocalDateTime create_date;
     @Column(name = "UPDATE_DATE")
     private LocalDateTime update_date;
+
+
+
     @PrePersist
     public void prePersistDate() {
         if(create_date  == null &&  update_date == null) //We set default value in case if the value is not set yet.

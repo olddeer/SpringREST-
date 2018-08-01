@@ -2,36 +2,36 @@ package at.bitmedia.schoolreader.service;
 
 import at.bitmedia.schoolreader.entity.Pupil;
 import at.bitmedia.schoolreader.entity.TaskPupil;
-import at.bitmedia.schoolreader.repositories.TaskPupilRepo;
-import at.bitmedia.schoolreader.repositories.UserRepo;
+import at.bitmedia.schoolreader.repositories.TaskPupilRepository;
+import at.bitmedia.schoolreader.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class PupilServiceBean implements PupilService {
+public class PupilServiceImpl implements PupilService {
 
     @Autowired
-   private UserRepo userRepo;
+   private UserRepository userRepository;
 
     @Autowired
-   private TaskPupilRepo taskRepo;
+   private TaskPupilRepository taskRepo;
 
     @Override
     public Pupil findById(int id) {
-        Pupil newPupil = userRepo.findById(id).get();
+        Pupil newPupil = userRepository.findById(id).get();
         return newPupil;
     }
 
     @Override
     public List<Pupil> findAll() {
-        List<Pupil> list = userRepo.findAll();
+        List<Pupil> list = userRepository.findAll();
         return list;
     }
 
     @Override
     public Pupil findByUsername(String name) {
-      Pupil newPupil = userRepo.findByUsername(name);
+      Pupil newPupil = userRepository.findByUsername(name);
         return newPupil;
     }
 

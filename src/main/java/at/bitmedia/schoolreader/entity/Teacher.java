@@ -6,11 +6,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="SR_TEACHER")
+@Table(name = "SR_TEACHER")
 public class Teacher {
+
     @Id
     @Column(name = "SRT_ID")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int teacherId;
 
     @OneToMany(mappedBy = "teacher")
@@ -19,16 +20,25 @@ public class Teacher {
     private LocalDateTime create_date;
     @Column(name = "UPDATE_DATE")
     private LocalDateTime update_date;
+    private String name;
+    private String surname;
+    private String email;
+    private String phone;
+
     @PrePersist
     public void prePersistDate() {
-        if(create_date  == null &&  update_date == null) //We set default value in case if the value is not set yet.
-            create_date  = LocalDateTime.now();
-        update_date =create_date;
+        if (create_date == null && update_date == null) //We set default value in case if the value is not set yet.
+        {
+            create_date = LocalDateTime.now();
+        }
+        update_date = create_date;
     }
+
     @PreUpdate
     public void preUpdateDate() {
         update_date = LocalDateTime.now();
     }
+
     public LocalDateTime getCreate_date() {
         return create_date;
     }
@@ -45,19 +55,13 @@ public class Teacher {
         this.update_date = update_date;
     }
 
-    public void setTeacherClasses(Set<TeacherClass> teacherClasses) {
-        this.teacherClasses = teacherClasses;
-    }
     public Set<TeacherClass> getTeacherClasses() {
         return teacherClasses;
     }
 
-    private String name;
-
-    private String surname;
-    private String email;
-    private String phone;
-
+    public void setTeacherClasses(Set<TeacherClass> teacherClasses) {
+        this.teacherClasses = teacherClasses;
+    }
 
     public int getTeacherId() {
         return teacherId;

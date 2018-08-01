@@ -1,7 +1,7 @@
 package at.bitmedia.schoolreader.service;
 
 import at.bitmedia.schoolreader.entity.Pupil;
-import at.bitmedia.schoolreader.repositories.UserRepo;
+import at.bitmedia.schoolreader.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
-    private UserRepo userRepository;
+    private UserRepository userRepository;
+
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

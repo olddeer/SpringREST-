@@ -3,8 +3,9 @@ package at.bitmedia.schoolreader.controller;
 import at.bitmedia.schoolreader.entity.Audio;
 import at.bitmedia.schoolreader.entity.Result;
 import at.bitmedia.schoolreader.service.AudioService;
-import at.bitmedia.schoolreader.service.ResultServiceBean;
+import at.bitmedia.schoolreader.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,49 +15,42 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.List;
 
 @RestController
-@RequestMapping("/schoolreader-api/result")
+@RequestMapping("/api/result")
 
 public class ResultController {
 
     @Autowired
-    private AudioService fileStorageService;
+    private AudioService audioService;
     @Autowired
-    private ResultServiceBean resBean;
+    private ResultService resultService;
 
     @GetMapping("/{id}")
     @CrossOrigin(origins = "*")
     public Result getResultById(@PathVariable Integer id) {
-        return resBean.findById(id);
-    }
-
-
-    @GetMapping("/all")
-    @CrossOrigin(origins = "*")
-    public List<Result> getResultAll() {
-        return resBean.findAll();
+        return resultService.findById(id);
     }
 
     @PostMapping("/add")
     @CrossOrigin(origins = "*")
     public Result uploadResult(@Valid @RequestBody Result res) {
-        return resBean.insertResult(res);
+
+        return resultService.insertResult(res);
     }
 
     @PostMapping("/uploadAudio")
     @CrossOrigin(origins = "*")
     public Audio uploadFile(@RequestParam("file") MultipartFile file) {
-        return fileStorageService.storeFile(file);
+        return audioService.storeFile(file);
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<org.springframework.core.io.Resource> downloadFile(@PathVariable String fileName,
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName,
         HttpServletRequest request) {
 
-        org.springframework.core.io.Resource resource = fileStorageService.loadFileAsResource(fileName);
+        Resource resource = audioService.loadFileAsResource(fileName);
 
         String contentType = null;
         try {
