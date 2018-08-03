@@ -21,11 +21,18 @@ INSERT INTO SR_AUDIO (path)VALUES ('D:/somewhere');
 INSERT INTO SR_AUDIO (path)VALUES ('E:/somewhere');
 
 
+CREATE TYPE public.status_result AS ENUM (
+  'Unchecked',
+  'Checked'
+);
+
+ALTER TYPE public.status_result OWNER TO postgres;
 CREATE TABLE public.SR_RESULT (
    SRR_ID serial NOT NULL,
     SRT_P_ID serial NOT NULL,
     SRA_ID serial NOT NULL,
     COMMENT character varying(255) NOT NULL,
+      STATUS public.status_result DEFAULT 'Unchecked'::public.status_result,
       CREATE_DATE  timestamp(0) without time zone NOT NULL DEFAULT now(),
     UPDATE_DATE  timestamp(0) without time zone NOT NULL DEFAULT now()
 

@@ -3,40 +3,43 @@ package at.bitmedia.schoolreader.entity;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name ="SR_TEACHER_CLASS",schema = "public" )
+@Table(name = "SR_TEACHER_CLASS", schema = "public")
 public class TeacherClass {
+
     @Id
     @Column(name = "SRT_C_ID")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int taskPupilId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "SRT_ID")
     @JsonIgnore
     private Teacher teacher;
-    @PrePersist
-    public void prePersistDate() {
-        if(create_date  == null &&  update_date == null) //We set default value in case if the value is not set yet.
-            create_date  = LocalDateTime.now();
-        update_date =create_date;
-    }
-    @PreUpdate
-    public void preUpdateDate() {
-        update_date = LocalDateTime.now();
-    }
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "SRC_ID")
     @JsonIgnore
-    private  Class  class2;
-
+    private Class class2;
     @Column(name = "CREATE_DATE")
     private LocalDateTime create_date;
     @Column(name = "UPDATE_DATE")
     private LocalDateTime update_date;
+
+    @PrePersist
+    public void prePersistDate() {
+        if (create_date == null && update_date == null) //We set default value in case if the value is not set yet.
+        {
+            create_date = LocalDateTime.now();
+        }
+        update_date = create_date;
+    }
+
+    @PreUpdate
+    public void preUpdateDate() {
+        update_date = LocalDateTime.now();
+    }
 
     public int getTaskPupilId() {
         return taskPupilId;

@@ -1,17 +1,17 @@
 package at.bitmedia.schoolreader.service;
 
 import at.bitmedia.schoolreader.entity.TaskPupil;
-import at.bitmedia.schoolreader.repositories.TaskPupilRepo;
+import at.bitmedia.schoolreader.repositories.TaskPupilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TaskPupilServiceBean implements TaskPupilService {
+public class TaskPupilServiceImpl implements TaskPupilService {
 
     @Autowired
-    private TaskPupilRepo taskRepo;
+    private TaskPupilRepository taskRepo;
 
     @Override
     public TaskPupil insertTaskPupil(TaskPupil tp) {

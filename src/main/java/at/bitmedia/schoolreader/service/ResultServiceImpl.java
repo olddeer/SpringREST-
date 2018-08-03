@@ -1,30 +1,30 @@
 package at.bitmedia.schoolreader.service;
 
 import at.bitmedia.schoolreader.entity.Result;
-import at.bitmedia.schoolreader.repositories.ResultRepo;
+import at.bitmedia.schoolreader.repositories.ResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ResultServiceBean implements ResultService {
+public class ResultServiceImpl implements ResultService {
 
     @Autowired
-    private ResultRepo resultRepo;
+    private ResultRepository resultRepository;
 
     @Override
     public List<Result> findAll() {
-        return resultRepo.findAll();
+        return resultRepository.findAll();
     }
 
     @Override
     public Result findById(int id) {
-        return resultRepo.findById(id).get();
+        return resultRepository.findById(id).get();
     }
 
     @Override
     public Result insertResult(Result r) {
-        return resultRepo.save(r);
+        return resultRepository.save(r);
     }
 }

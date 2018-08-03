@@ -1,3 +1,3 @@
 
-INSERT INTO public.SR_TASK ( TITLE,LOCATION ) VALUES ( 'New cool title','Book');
-INSERT INTO public.SR_TASK ( TITLE,LOCATION ) VALUES ( 'New cool title','Robinson Cruso p.4, par.6');
+INSERT INTO public.SR_TASK ( TITLE,LOCATION,CATEGORY,COUNT_OF_REPEATS ) VALUES ( 'New cool title','Book','A',4);
+INSERT INTO public.SR_TASK ( TITLE,LOCATION,CATEGORY,COUNT_OF_REPEATS ) VALUES ( 'New cool title','Robinson Cruso p.4, par.6','B',4);
