@@ -1,0 +1,28 @@
+version: '2'
+services:
+  postgres:
+    image: registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/postgres
+    volumes:
+    - schoolreader_db:/var/lib/postgresql/data
+    ports:
+      - 5436:5432
+  tomcat:
+    image: registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/api
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: Cnfkrth1
+      DB_JDBCURL: jdbc:postgresql://schoolreader-db/schoolreader
+    links:
+      - postgres:schoolreader-db
+    ports:
+      - 8080:8080
+  pgadmin:
+    container_name: schoolreader-pgadmin
+    image: thajeztah/pgadmin4:latest
+    ports:
+      - 5050:5050
+    links:
+      - postgres:schoolreader-db
+volumes:
+  schoolreader_db:
+    driver: local
