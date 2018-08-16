@@ -55,11 +55,6 @@ webapp_package_tag:
   only:
     - /^v.*$/
     
-variables:
-  RANCHER_URL: http://178.151.252.225:7005
-  RANCHER_ACCESS_KEY: A507F5A5EEBE85EC980A
-  RANCHER_SECRET_KEY: 4DTicqNTJfTFF9Zf5GcyoWTkegL8PTckz9Z5tk1K
-
 webapp_deploy:
   stage: deploy
   image: cdrx/rancher-gitlab-deploy
