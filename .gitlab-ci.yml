@@ -55,13 +55,6 @@ webapp_package_tag:
   only:
     - /^v.*$/
     
-webapp_deploy:
-  stage: deploy
-  image: cdrx/rancher-gitlab-deploy
-  script:
-    - upgrade --stack schoolreader --service schoolreader-api --new-image registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/api
-    - upgrade --stack schoolreader --service schoolreader-postgres --new-image  bitmedia/schoolreader/schoolreader-api/dev/postgres
-
 variables:
   RANCHER_URL: http://178.151.252.225:7005
   RANCHER_ACCESS_KEY: A507F5A5EEBE85EC980A
@@ -72,4 +65,4 @@ webapp_deploy:
   image: cdrx/rancher-gitlab-deploy
   script:
   - upgrade --stack schoolreader --service schoolreader-api --new-image registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/api
-  - upgrade --stack schoolreader --service schoolreader-postgres --new-image registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/nginx
+  - upgrade --stack schoolreader --service schoolreader-postgres --new-image registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/postgres
