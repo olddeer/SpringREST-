@@ -1,5 +1,6 @@
 package at.bitmedia.schoolreader.controller;
 
+import at.bitmedia.schoolreader.entity.Audio;
 import at.bitmedia.schoolreader.entity.Task;
 import at.bitmedia.schoolreader.entity.TaskPupil;
 import at.bitmedia.schoolreader.service.TaskPupilService;
@@ -28,6 +29,19 @@ public class TaskController {
     public ResponseEntity<List<Task>> allTasks() {
         return new ResponseEntity<List<Task>>(taskPup.findAll(), HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<TaskPupil> updateTask(@RequestParam TaskPupil taskPupil) {
+        return new ResponseEntity<>(taskPupilServiceBean.updateTask(taskPupil), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getAudios", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<List<Audio>> updateTask(@RequestParam Integer id) {
+        return new ResponseEntity<>(taskPupilServiceBean.findAllAudiosByTaskId(id), HttpStatus.OK);
+    }
+
 
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @CrossOrigin(origins = "*")

@@ -16,9 +16,9 @@ ALTER TABLE ONLY public.SR_AUDIO
 
 ALTER TABLE public.SR_AUDIO OWNER TO postgres;
 
-INSERT INTO SR_AUDIO (path) VALUES ('C:/somewhere');
-INSERT INTO SR_AUDIO (path)VALUES ('D:/somewhere');
-INSERT INTO SR_AUDIO (path)VALUES ('E:/somewhere');
+      INSERT INTO SR_AUDIO (path) VALUES ('MiyaGi – Captain.mp3');
+        INSERT INTO SR_AUDIO (path)VALUES ('Kedzie Jacknife – Neutron.mp3');
+          INSERT INTO SR_AUDIO (path)VALUES ('Sia_-_Never_Give_Up.mp3');
 
 
 CREATE TYPE public.status_result AS ENUM (

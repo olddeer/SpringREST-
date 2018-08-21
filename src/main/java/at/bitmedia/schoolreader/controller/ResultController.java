@@ -2,10 +2,9 @@ package at.bitmedia.schoolreader.controller;
 
 import at.bitmedia.schoolreader.entity.Audio;
 import at.bitmedia.schoolreader.entity.Result;
-import at.bitmedia.schoolreader.service.AudioService;
+import at.bitmedia.schoolreader.service.AudioServiceImpl;
 import at.bitmedia.schoolreader.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/result")
@@ -22,7 +20,7 @@ import java.io.IOException;
 public class ResultController {
 
     @Autowired
-    private AudioService audioService;
+    private AudioServiceImpl audioServiceImpl;
     @Autowired
     private ResultService resultService;
 
@@ -42,30 +40,25 @@ public class ResultController {
     @PostMapping("/uploadAudio")
     @CrossOrigin(origins = "*")
     public Audio uploadFile(@RequestParam("file") MultipartFile file) {
-        return audioService.storeFile(file);
+        return audioServiceImpl.storeFile(file);
     }
 
-    @GetMapping("/downloadFile/{fileName:.+}")
+    @GetMapping(value = "/downloadFile/{fileName:.+}",
+        produces = MediaType.MULTIPART_FORM_DATA_VALUE)
     @CrossOrigin(origins = "*")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName,
+    public ResponseEntity<byte[]> downloadFile(@PathVariable String fileName,
         HttpServletRequest request) {
 
-        Resource resource = audioService.loadFileAsResource(fileName);
+        byte[] resource = audioServiceImpl.loadFileAsResource(fileName);
 
         String contentType = null;
-        try {
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-        } catch (IOException ex) {
-
-        }
-
         if (contentType == null) {
-            contentType = "application/octet-stream";
+            contentType = "audio/mp3";
         }
 
         return ResponseEntity.ok()
             .contentType(MediaType.parseMediaType(contentType))
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + resource.getFilename())
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName)
             .body(resource);
     }
 }
