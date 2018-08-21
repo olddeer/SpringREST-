@@ -1,10 +1,14 @@
 package at.bitmedia.schoolreader.service;
 
+import at.bitmedia.schoolreader.entity.Audio;
+import at.bitmedia.schoolreader.entity.Result;
 import at.bitmedia.schoolreader.entity.TaskPupil;
+import at.bitmedia.schoolreader.repositories.ResultRepository;
 import at.bitmedia.schoolreader.repositories.TaskPupilRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,16 +17,30 @@ public class TaskPupilServiceImpl implements TaskPupilService {
     @Autowired
     private TaskPupilRepository taskRepo;
 
+    @Autowired
+    private ResultRepository resultRepository;
+
     @Override
     public TaskPupil insertTaskPupil(TaskPupil tp) {
         return taskRepo.save(tp);
     }
 
     @Override
-    public void updateTask(TaskPupil task){
-        taskRepo.save(task);
+    public TaskPupil updateTask(TaskPupil task) {
+        return taskRepo.save(task);
     }
 
+    @Override
+    public List<Audio> findAllAudiosByTaskId(Integer id) {
+        List<Result> resultList = resultRepository
+            .findAllByTaskPupil_TaskPupilId(id);
+        List<Audio> audios = new ArrayList<>();
+        for (Result result: resultList)
+        {
+            audios.add(result.getAudio());
+        }
+        return audios;
+    }
 
     @Override
     public List<TaskPupil> findAll() {
