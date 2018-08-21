@@ -3,16 +3,12 @@ variables:
 
 image: maven:3-jdk-8
 
-
-
-    services:
-      - postgres:latest
-
-
   stages:
      - build
      - package
      - deploy
+   services:
+        - postgres:latest
 
   variables:
     RANCHER_URL: http://178.151.252.225:7005
