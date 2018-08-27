@@ -3,7 +3,7 @@ FROM openjdk:8
 ENV JAVA_OPTS=""
 
 COPY  /target/*.jar /app.jar
-COPY ./uploads /var/www
+COPY ./uploads /var/www/uploads
 
 WORKDIR /var/www
 
