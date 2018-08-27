@@ -2,12 +2,62 @@ variables:
   MAVEN_REPO: "$CI_PROJECT_DIR/.m2"
 
 
+image: maven:3-jdk-8
+
 stages:
+  - build
+  - package
   - deploy
 
 services:
   - postgres:latest
 
+
+
+variables:
+  POSTGRES_DB: schoolreader
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: Cnfkrth1
+  SWAGGER_URL: http://178.151.225.252:7004
+
+maven-build:
+  stage: build
+  script:
+    - mkdir target
+    - mvn clean install -Dspring.datasource.url="jdbc:postgresql://postgres:5432/$POSTGRES_DB" -Dspring.datasource.username="$POSTGRES_USER" -Dspring.datasource.password="$POSTGRES_PASSWORD" -Dswagger.url="$SWAGGER_URL"
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/target/*.jar
+    expire_in: 1 week
+
+webapp_package:
+  image: docker:latest
+  services:
+    - docker:dind
+
+  stage: package
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -f dockerfile_postgres -t $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG/postgres .
+    - docker push $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG/postgres
+    - docker build -f dockerfile_app -t $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG/api .
+    - docker push $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_SLUG/api
+  except:
+    - tags
+
+webapp_package_tag:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: package
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -f dockerfile_postgres -t $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_TAG .
+    - docker push $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_TAG
+    - docker build -f dockerfile_app -t $CI_REGISTRY_IMAGE/api:$CI_COMMIT_TAG .
+    - docker push $CI_REGISTRY_IMAGE/api:$CI_COMMIT_TAG
+  only:
+    - /^v.*$/
 
 webapp_deploy:
   stage: deploy

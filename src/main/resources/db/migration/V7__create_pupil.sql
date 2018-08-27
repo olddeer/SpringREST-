@@ -4,6 +4,7 @@ CREATE TABLE public.SR_PUPIL (
     SRC_ID serial NOT NULL,
     NAME character varying(255),
     SURNAME character varying(255),
+     EMAIL character varying(255),
     COUNT_STARS integer,
    USERNAME character varying(255),
     PASSWORD character varying(255),

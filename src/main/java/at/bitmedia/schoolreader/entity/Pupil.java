@@ -19,6 +19,7 @@ public class Pupil implements UserDetails {
     private int pupilId;
     @Column(name = "CREATE_DATE")
     private LocalDateTime create_date;
+    private String email;
     @Column(name = "UPDATE_DATE")
     private LocalDateTime update_date;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -32,6 +33,14 @@ public class Pupil implements UserDetails {
     private Integer countStars;
     private String username;
     private String password;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Pupil() {
     }
