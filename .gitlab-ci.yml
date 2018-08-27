@@ -24,7 +24,7 @@ maven-build:
   stage: build
   script:
     - mkdir target
-    - mvn clean install -Dspring.datasource.url="jdbc:postgresql://postgres:5432/$POSTGRES_DB" -Dspring.datasource.username="$POSTGRES_USER" -Dspring.datasource.password="$POSTGRES_PASSWORD" -Dswagger.url="$POSTGRES_ENV_SWAGGER_URL"
+    - mvn clean install -Dspring.datasource.url="jdbc:postgresql://postgres:5432/$POSTGRES_DB" -Dspring.datasource.username="$POSTGRES_USER" -Dspring.datasource.password="$POSTGRES_PASSWORD" -Dswagger.url="$SWAGGER_URL"
   artifacts:
     paths:
       - $CI_PROJECT_DIR/target/*.jar
