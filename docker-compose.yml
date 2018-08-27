@@ -5,13 +5,3 @@ services:
     image: registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/postgres
     ports:
       - 5436:5432
-  tomcat:
-    image: registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/tomcat
-    environment:
-      DB_USERNAME: postgres
-      DB_PASSWORD: Cnfkrth1
-      DB_JDBCURL: jdbc:postgresql://schoolreader-db/schoolreader
-    links:
-      - postgres:schoolreader-db
-    ports:
-      - 8080:8080

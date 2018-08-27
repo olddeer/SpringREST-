@@ -24,7 +24,7 @@ maven-build:
   stage: build
   script:
     - mkdir target
-    - mvn clean install -Dspring.datasource.url="jdbc:postgresql://postgres:5432/$POSTGRES_DB" -Dspring.datasource.username="$POSTGRES_USER" -Dspring.datasource.password="$POSTGRES_PASSWORD" -Dswagger.url="$SWAGGER_URL"
+    - mvn clean install -Dspring.datasource.url="jdbc:postgresql://postgres:5432/$POSTGRES_DB" -Dspring.datasource.username="$POSTGRES_USER" -Dspring.datasource.password="$POSTGRES_PASSWORD" -Dswagger.url="$POSTGRES_ENV_SWAGGER_URL"
   artifacts:
     paths:
       - $CI_PROJECT_DIR/target/*.jar
@@ -64,5 +64,5 @@ webapp_deploy:
   image: cdrx/rancher-gitlab-deploy
 
   script:
-      - upgrade --stack schoolreader  --rancher-secret 4DTicqNTJfTFF9Zf5GcyoWTkegL8PTckz9Z5tk1K --rancher-key A507F5A5EEBE85EC980A --rancher-url http://178.151.252.225:7005  --stack schoolreader --service schoolreader-postgres --new-image  registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/postgres
+      - upgrade --stack schoolreader --rancher-secret 4DTicqNTJfTFF9Zf5GcyoWTkegL8PTckz9Z5tk1K --rancher-key A507F5A5EEBE85EC980A --rancher-url http://178.151.252.225:7005  --stack schoolreader --service schoolreader-postgres --new-image  registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/postgres
       - upgrade --stack schoolreader --rancher-secret 4DTicqNTJfTFF9Zf5GcyoWTkegL8PTckz9Z5tk1K --rancher-key A507F5A5EEBE85EC980A  --rancher-url http://178.151.252.225:7005  --stack schoolreader --service schoolreader-api --new-image registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/update-audio-service/api
