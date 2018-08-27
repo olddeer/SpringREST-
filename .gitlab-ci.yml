@@ -1,8 +1,6 @@
 variables:
   MAVEN_REPO: "$CI_PROJECT_DIR/.m2"
 
-image: maven:3-jdk-8
-
 stages:
   - deploy
 
@@ -14,5 +12,5 @@ webapp_deploy:
   image: cdrx/rancher-gitlab-deploy
 
   script:
-    - upgrade --rancher_secret_key 4DTicqNTJfTFF9Zf5GcyoWTkegL8PTckz9Z5tk1K --rancher_acces_key A507F5A5EEBE85EC980A  --rancher-url http://178.151.252.225:7005 --service schoolreader-api --stack schoolreader  --new-image registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/api
-    - upgrade --rancher_secret_key 4DTicqNTJfTFF9Zf5GcyoWTkegL8PTckz9Z5tk1K --rancher_acces_key A507F5A5EEBE85EC980A --rancher-url http://178.151.252.225:7005 --service schoolreader-postgres --stack schoolreader  --new-image  bitmedia/schoolreader/schoolreader-api/dev/postgres
+    - upgrade rancher_secret_key 4DTicqNTJfTFF9Zf5GcyoWTkegL8PTckz9Z5tk1K rancher_acces_key A507F5A5EEBE85EC980A rancher-url http://178.151.252.225:7005 --service schoolreader-api --stack schoolreader  --new-image registry.gitlab.com/bitmedia/schoolreader/schoolreader-api/dev/api
+    - upgrade rancher_secret_key 4DTicqNTJfTFF9Zf5GcyoWTkegL8PTckz9Z5tk1K rancher_acces_key A507F5A5EEBE85EC980A rancher-url http://178.151.252.225:7005 --service schoolreader-postgres --stack schoolreader  --new-image  bitmedia/schoolreader/schoolreader-api/dev/postgres
