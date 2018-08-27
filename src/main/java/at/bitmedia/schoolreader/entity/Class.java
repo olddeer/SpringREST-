@@ -17,13 +17,12 @@ public class Class {
     private int classId;
 
     @OneToMany(mappedBy = "class2")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Set<TeacherClass> tasksPupil = new HashSet<>();
     @Column(name = "CREATE_DATE")
     private  LocalDateTime create_date;
     @Column(name = "UPDATE_DATE")
     private LocalDateTime update_date;
-
-
 
     @PrePersist
     public void prePersistDate() {

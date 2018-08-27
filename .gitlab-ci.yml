@@ -18,12 +18,13 @@ variables:
   RANCHER_URL: http://178.151.252.225:7005
   RANCHER_ACCESS_KEY: A507F5A5EEBE85EC980A
   RANCHER_SECRET_KEY: 4DTicqNTJfTFF9Zf5GcyoWTkegL8PTckz9Z5tk1K
+  SWAGGER_URL: http://178.151.252.225:7004
 
 maven-build:
   stage: build
   script:
     - mkdir target
-    - mvn clean install -Dspring.datasource.url="jdbc:postgresql://postgres:5432/$POSTGRES_DB" -Dspring.datasource.username="$POSTGRES_USER" -Dspring.datasource.password="$POSTGRES_PASSWORD"
+    - mvn clean install -Dspring.datasource.url="jdbc:postgresql://postgres:5432/$POSTGRES_DB" -Dspring.datasource.username="$POSTGRES_USER" -Dspring.datasource.password="$POSTGRES_PASSWORD" -Dswagger.url="$SWAGGER_URL"
   artifacts:
     paths:
       - $CI_PROJECT_DIR/target/*.jar
