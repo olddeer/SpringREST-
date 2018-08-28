@@ -55,7 +55,7 @@ public class ResultController {
 
         byte[] resource = audioServiceImpl.loadFileAsResource(fileName);
 
-        AudioBlob blob = new AudioBlob(resource);
+       AudioBlob blob = new AudioBlob(resource);
 
         return ResponseEntity.ok()
             .body(blob);
