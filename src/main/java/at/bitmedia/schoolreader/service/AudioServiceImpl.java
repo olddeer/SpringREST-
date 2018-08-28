@@ -81,7 +81,7 @@ public class AudioServiceImpl implements AudioService {
     }
 
     @Override
-    public byte[] loadFileAsResource(String fileName) {
+    public Resource loadFileAsResource(String fileName) {
         try {
             Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
             File file = filePath.toFile();
@@ -89,7 +89,7 @@ public class AudioServiceImpl implements AudioService {
             InputStream fs = new FileInputStream(file);
             byte[] bytes = IOUtils.toByteArray(fs);
             if (resource.exists()) {
-                return bytes;
+                return resource;
             } else {
                 throw new MyFileNotFoundException("File not found " + fileName);
             }
