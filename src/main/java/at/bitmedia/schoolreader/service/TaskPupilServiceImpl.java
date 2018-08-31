@@ -25,18 +25,13 @@ public class TaskPupilServiceImpl implements TaskPupilService {
         return taskRepo.save(tp);
     }
 
-    @Override
-    public TaskPupil updateTask(TaskPupil task) {
-        return taskRepo.save(task);
-    }
 
     @Override
     public List<Audio> findAllAudiosByTaskId(Integer id) {
         List<Result> resultList = resultRepository
             .findAllByTaskPupil_TaskPupilId(id);
         List<Audio> audios = new ArrayList<>();
-        for (Result result: resultList)
-        {
+        for (Result result : resultList) {
             audios.add(result.getAudio());
         }
         return audios;

@@ -14,6 +14,12 @@ public class ResultServiceImpl implements ResultService {
     private ResultRepository resultRepository;
 
     @Override
+    public Result findByAudioId(Integer id) {
+
+        return resultRepository.findByAudio_SraId(id);
+    }
+
+    @Override
     public List<Result> findAll() {
         return resultRepository.findAll();
     }

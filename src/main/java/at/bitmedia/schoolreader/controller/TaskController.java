@@ -1,6 +1,7 @@
 package at.bitmedia.schoolreader.controller;
 
 import at.bitmedia.schoolreader.entity.Audio;
+import at.bitmedia.schoolreader.entity.Status;
 import at.bitmedia.schoolreader.entity.Task;
 import at.bitmedia.schoolreader.entity.TaskPupil;
 import at.bitmedia.schoolreader.service.TaskPupilService;
@@ -12,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -30,11 +32,6 @@ public class TaskController {
         return new ResponseEntity<List<Task>>(taskPup.findAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    @CrossOrigin(origins = "*")
-    public ResponseEntity<TaskPupil> updateTask(@RequestParam TaskPupil taskPupil) {
-        return new ResponseEntity<>(taskPupilServiceBean.updateTask(taskPupil), HttpStatus.OK);
-    }
 
     @RequestMapping(value = "/getAudios", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
     @CrossOrigin(origins = "*")

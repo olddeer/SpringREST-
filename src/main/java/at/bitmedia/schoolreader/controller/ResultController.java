@@ -1,9 +1,8 @@
 package at.bitmedia.schoolreader.controller;
 
 import at.bitmedia.schoolreader.entity.Audio;
-import at.bitmedia.schoolreader.entity.AudioBlob;
 import at.bitmedia.schoolreader.entity.Result;
-import at.bitmedia.schoolreader.service.AudioServiceImpl;
+import at.bitmedia.schoolreader.service.AudioService;
 import at.bitmedia.schoolreader.service.ResultService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -17,9 +16,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.sql.SQLException;
 
 @RestController
 @RequestMapping("/api/result")
@@ -27,15 +24,26 @@ import java.sql.SQLException;
 public class ResultController {
 
     @Autowired
-    private AudioServiceImpl audioServiceImpl;
+    private AudioService audioService;
+
     @Autowired
     private ResultService resultService;
+
 
     @GetMapping("/{id}")
     @CrossOrigin(origins = "*")
     public Result getResultById(@PathVariable Integer id) {
         return resultService.findById(id);
     }
+
+
+    @GetMapping("/getByAudioId")
+    @CrossOrigin(origins = "*")
+    public Result getResultByAudioId(@RequestParam Integer id) {
+        return resultService.findById(id);
+    }
+
+
 
     @PostMapping("/add")
     @CrossOrigin(origins = "*")
@@ -48,14 +56,14 @@ public class ResultController {
     @CrossOrigin(origins = "*")
     public Audio uploadFile(@RequestParam("file") MultipartFile file) {
 
-        return audioServiceImpl.storeFile(file);
+        return audioService.storeFile(file);
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")
     @CrossOrigin(origins = "*")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
 
-        Resource resource = audioServiceImpl.loadFileAsResource(fileName);
+        Resource resource = audioService.loadFileAsResource(fileName);
         String contentType = "audio/mp3";
 
         return ResponseEntity.ok()

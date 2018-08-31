@@ -23,6 +23,11 @@ public class TaskPupil {
     private LocalDateTime create_date;
     @Column(name = "UPDATE_DATE")
     private LocalDateTime update_date;
+
+    public void setUpdate_date(LocalDateTime update_date) {
+        this.update_date = update_date;
+    }
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "SRP_ID")
 

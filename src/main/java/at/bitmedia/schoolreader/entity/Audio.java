@@ -15,7 +15,8 @@ public class Audio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int sra_id;
+    @Column(name = "sra_id")
+    private int sraId;
     private String path;
     @Column(name = "CREATE_DATE")
     private LocalDateTime create_date;
@@ -35,12 +36,12 @@ public class Audio {
         update_date = LocalDateTime.now();
     }
 
-    public int getSra_id() {
-        return sra_id;
+    public int getSraId() {
+        return sraId;
     }
 
-    public void setSra_id(int st_audio) {
-        this.sra_id = st_audio;
+    public void setSraId(int st_audio) {
+        this.sraId = st_audio;
     }
 
     public String getPath() {

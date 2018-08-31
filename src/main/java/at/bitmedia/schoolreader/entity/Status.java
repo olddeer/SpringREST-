@@ -1,5 +1,9 @@
 package at.bitmedia.schoolreader.entity;
 
+
+import javax.persistence.Enumerated;
+
+
 public enum Status {
     New("New"), In_progress("In progress"), Done("Done"), In_checking("In checking");
     private String name;
